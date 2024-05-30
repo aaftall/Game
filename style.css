@@ -1,0 +1,36 @@
+body {
+  text-align: center;
+  margin: 20px;
+}
+
+/* #game-intro {
+  padding: 20px 0px;
+  width: 360px;
+  height: 576px;
+  margin: auto;
+  background-image: url(./Assets/doodlejumpbg.png);
+} */
+
+#board {
+  /* display: none; */
+  background-image: url(./Assets/doodlejumpbg.png);
+}
+/* 
+#title-logo {
+  width: fit-content;
+  width: 280px;
+}
+
+.start-button {
+  background-color: transparent;
+  /* border: none; */
+/* }
+
+#start-button {
+  width: 200px;
+  text-align: left;
+}
+
+#select-player {
+  width: 300px;
+}  */
