@@ -27,6 +27,7 @@ let platformImg;
 
 let score = 0;
 let maxScore = 0;
+let gameStart = false;
 let gameOver = false;
 
 let doodler = {
@@ -37,49 +38,52 @@ let doodler = {
   height: doodlerHeight,
 };
 
-window.onload = function () {
-  board = document.getElementById("board");
-  board.height = boardHeight;
-  board.width = boardWidth;
-  context = board.getContext("2d");
+let platform = {
+  img: platformImg,
+  x: boardWidth / 3,
+  y: boardHeight - 80,
+  width: platformWidth,
+  height: platformHeight,
+};
+platformArray.push(platform);
 
-  // Load images
-  doodlerRightImg = new Image();
-  doodlerRightImg.src = "Assets/doodler-right.png";
-  doodler.img = doodlerRightImg;
-  doodlerRightImg.onload = function () {
-    context.drawImage(
-      doodler.img,
-      doodler.x,
-      doodler.y,
-      doodler.width,
-      doodler.height
-    );
-  };
-  doodlerLeftImg = new Image();
-  doodlerLeftImg.src = "Assets/doodler-left.png";
-
-  platformImg = new Image();
-  platformImg.src = "Assets/platform.png";
-
-  velocityY = initialVelocityY;
+const gameIntro = document.getElementById("game-intro");
+const startGameBtn = document.getElementById("start-game");
+startGameBtn.addEventListener("click" || "Space", () => {
+  gameIntro.classList.add("hidden");
+  gameScreen.classList.remove("hidden");
   placePlatforms();
-  requestAnimationFrame(update);
   document.addEventListener("keydown", moveDoodler);
   document.addEventListener("keyup", stopDoodler);
+  requestAnimationFrame(update);
+});
+board = document.getElementById("board");
+board.height = boardHeight;
+board.width = boardWidth;
+context = board.getContext("2d");
 
-  const startButton = document.getElementById("start-button");
-
-  startButton.addEventListener("click", function () {
-    startGame();
-  });
-
-  function startGame() {
-    console.log("start game");
-    game = new Game();
-    game.start();
-  }
+// Load images
+doodlerRightImg = new Image();
+doodlerRightImg.src = "Assets/doodler-right.png";
+doodler.img = doodlerRightImg;
+doodlerRightImg.onload = function () {
+  context.drawImage(
+    doodler.img,
+    doodler.x,
+    doodler.y,
+    doodler.width,
+    doodler.height
+  );
 };
+doodlerLeftImg = new Image();
+doodlerLeftImg.src = "./Assets/doodler-left.png";
+
+platformImg = new Image();
+platformImg.src = "./Assets/platform.png";
+
+velocityY = initialVelocityY;
+
+function introDoodle() {}
 
 function update() {
   requestAnimationFrame(update);
@@ -109,8 +113,8 @@ function update() {
   // Platforms
   for (let i = 0; i < platformArray.length; i++) {
     let platform = platformArray[i];
-    if (velocityY < 0 && doodler.y - 10 < boardHeight * 0.75) {
-      platform.y -= initialVelocityY;
+    if (velocityY < 0 && doodler.y - 10 < boardHeight * 0.5) {
+      platform.y -= velocityY;
     }
     if (detectCollision(doodler, platform) && velocityY > 0) {
       velocityY = initialVelocityY;
@@ -212,10 +216,24 @@ function newPlatform() {
 }
 
 function detectCollision(a, b) {
+  //   const leftDood = a.x;
+  //   const rightDood = a.x + a.width;
+  //   const leftPlat = b.x;
+  //   const rightPlat = b.x + b.width;
+  //   const topDood = a.y;
+  //   const botDood = a.y + a.height;
+  //   const topPlat = b.y;
+  //   const botPlat = b.y + b.height;
+
+  //   return (
+  //     leftDood < rightPlat &&
+  //     rightDood > leftPlat &&
+  //     topDood < topPlat &&
+  //     botDood > botPlat
   return (
-    a.x < b.x + b.width &&
-    a.x + a.width > b.x &&
-    a.y < b.y + b.height &&
+    a.x < b.x + b.width - 5 &&
+    a.x + a.width > b.x + 5 &&
+    a.y < b.y + b.height - 56 &&
     a.y + a.height > b.y
   );
 }

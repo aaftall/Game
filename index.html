@@ -8,9 +8,9 @@
   </head>
   <body>
     <!-- <div id="game-intro">
-      <img id="title-logo" src="./Title logo.png" alt="" />
+      <img id="title-logo" src="./Assets/Title logo.png" alt="" />
       <button class="start-button">
-        <img id="start-button" src="./Play button.png" alt="" />
+        <img id="start-button" src="./Assets/Play button.png" alt="" />
       </button>
       <button class="start-button">
         <img
@@ -20,11 +20,32 @@
         />
       </button>
     </div> -->
-    <!-- <div id="game-screen"></div> -->
-    <canvas id="board"></canvas>
-    <div id="game-end"></div>
+    <section id="full">
+      <canvas id="board" class="hidden"></canvas>
+      <div id="game-intro">
+        <div><img src="./Assets/Title logo.png" alt="" /></div>
+        <div>
+          <div id="animation">
+            <img id="doodler" src="./Assets/doodler-left.png" alt="" />
+            <img id="platform" src="./Assets/platform.png" alt="" />
+          </div>
+          <div>
+            <button class="start-button">
+              <img id="start-game" src="./Assets/Play button.png" alt="" />
+            </button>
+          </div>
+          <button class="start-button">
+            <img
+              id="select-player"
+              src="./Assets/Choose player button.png"
+              alt=""
+            />
+          </button>
+        </div>
+      </div>
+    </section>
     <script src="index.js"></script>
-    <!-- <script src="game.js"></script> -->
     <!-- <script src="script.js"></script> -->
+    <!-- <script src="game.js"></script> -->
   </body>
 </html>

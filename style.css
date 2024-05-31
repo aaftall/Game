@@ -3,34 +3,79 @@ body {
   margin: 20px;
 }
 
-/* #game-intro {
+#game-intro {
   padding: 20px 0px;
   width: 360px;
   height: 576px;
   margin: auto;
   background-image: url(./Assets/doodlejumpbg.png);
-} */
+  div > img {
+    max-width: 80%;
+  }
+}
 
 #board {
   /* display: none; */
   background-image: url(./Assets/doodlejumpbg.png);
 }
-/* 
+
 #title-logo {
   width: fit-content;
-  width: 280px;
+  width: 260px;
 }
 
 .start-button {
   background-color: transparent;
-  /* border: none; */
-/* }
+  border: none;
+}
 
-#start-button {
+#start-game {
+  margin-right: 100px;
   width: 200px;
   text-align: left;
 }
 
 #select-player {
   width: 300px;
-}  */
+  margin-left: 65px;
+  margin-top: 10px;
+}
+
+.hidden {
+  display: none !important;
+}
+
+#platform {
+  width: 60px;
+  margin-left: 200px;
+}
+
+@keyframes jumpUp {
+  0% {
+    transform: translateY(7px);
+  }
+  35% {
+    transform: translateY(-90px);
+  }
+  43% {
+    transform: translateY(-95px);
+  }
+  50% {
+    transform: translateY(-100px);
+  }
+  58% {
+    transform: translateY(-95px);
+  }
+  65% {
+    transform: translateY(-90px);
+  }
+  100% {
+    transform: translateY(7px);
+  }
+}
+
+#doodler {
+  width: 56px;
+  margin-left: 200px;
+  animation: jumpUp 0.8s ease-out infinite;
+}
