@@ -16,8 +16,8 @@ let doodlerLeftImg;
 // Physics
 let velocityX = 0;
 let velocityY = 0;
-let initialVelocityY = -5;
-let gravity = 0.1;
+let initialVelocityY = -6;
+let gravity = 0.2;
 
 // Platforms
 let platformArray = [];
@@ -113,10 +113,15 @@ function update() {
   // Platforms
   for (let i = 0; i < platformArray.length; i++) {
     let platform = platformArray[i];
-    if (velocityY < 0 && doodler.y - 10 < boardHeight * 0.5) {
+    if (velocityY < 0 && doodler.y < boardHeight * 0.5) {
       platform.y -= velocityY;
     }
+    // }
     if (detectCollision(doodler, platform) && velocityY > 0) {
+      //   if (!platform.hasBeenTouched) {
+      //     score += 20;
+      //   }
+      //   platform.hasBeenTouched = true;
       velocityY = initialVelocityY;
     }
     context.drawImage(
@@ -150,10 +155,10 @@ function update() {
 
 function moveDoodler(e) {
   if (e.code == "ArrowRight") {
-    velocityX = 7;
+    velocityX = 6;
     doodler.img = doodlerRightImg;
   } else if (e.code == "ArrowLeft") {
-    velocityX = -7;
+    velocityX = -6;
     doodler.img = doodlerLeftImg;
   } else if (e.code == "Space" && gameOver) {
     doodler = {
@@ -210,26 +215,15 @@ function newPlatform() {
     y: -platformHeight,
     width: platformWidth,
     height: platformHeight,
+    // hasBeenTouched: false,
   };
 
   platformArray.push(platform);
 }
 
 function detectCollision(a, b) {
-  //   const leftDood = a.x;
-  //   const rightDood = a.x + a.width;
-  //   const leftPlat = b.x;
-  //   const rightPlat = b.x + b.width;
-  //   const topDood = a.y;
-  //   const botDood = a.y + a.height;
-  //   const topPlat = b.y;
-  //   const botPlat = b.y + b.height;
-
-  //   return (
-  //     leftDood < rightPlat &&
-  //     rightDood > leftPlat &&
-  //     topDood < topPlat &&
-  //     botDood > botPlat
+  //   const leftDoodler = a.x;
+  //   const leftPlatform = b.x;
   return (
     a.x < b.x + b.width - 5 &&
     a.x + a.width > b.x + 5 &&
@@ -239,8 +233,9 @@ function detectCollision(a, b) {
 }
 
 function updateScore() {
-  let points = Math.floor(20 * Math.random());
+  let points = Math.floor(50 * Math.random()); //(0-1) *50 --> (0-50)
   if (velocityY < 0) {
+    //negative going up
     maxScore += points;
     if (score < maxScore) {
       score = maxScore;
